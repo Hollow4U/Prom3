@@ -27,6 +27,8 @@ public class PlayerController : NetworkBehaviour
     private float fireCooldown = 0.2f;
     private float fireTimer = 0f;
 
+    private Vector3 lastDirection = Vector3.forward;
+
     private void Awake()
     {
         currentStrategy = new ShotgunWeapon();
@@ -71,7 +73,7 @@ public class PlayerController : NetworkBehaviour
 
         if (Input.GetMouseButton(0) && fireTimer <= 0f)
         {
-            FireServerRpc();
+            FireServerRpc(lastDirection);
             fireTimer = fireCooldown;
         }
     }
@@ -82,13 +84,24 @@ public class PlayerController : NetworkBehaviour
         float v = Input.GetAxisRaw("Vertical");
 
         Vector3 dir = new Vector3(h, 0, v).normalized;
+
+        if (dir.sqrMagnitude > 0.01f)
+        {
+            lastDirection = dir;
+            shootPoint.rotation = Quaternion.LookRotation(dir);
+        }
+
         rb.linearVelocity = dir * speed + Vector3.up * rb.linearVelocity.y;
     }
 
     [Rpc(SendTo.Server)]
-    private void FireServerRpc()
+    private void FireServerRpc(Vector3 direction)
     {
-        GameObject prefab = weaponType == WeaponType.Laser ? laserBulletPrefab : shotgunBulletPrefab; 
-         currentStrategy.Shoot(shootPoint, OwnerClientId, prefab);
+        GameObject prefab = weaponType == WeaponType.Laser ? laserBulletPrefab : shotgunBulletPrefab;
+
+        Quaternion rotation = Quaternion.LookRotation(direction);
+
+        GameObject bullet = Instantiate(prefab, shootPoint.position, rotation);
+        bullet.GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
     }
 }

@@ -248,8 +248,7 @@ MonoBehaviour:
   shootPoint: {fileID: 1257252074641989037}
   laserBulletPrefab: {fileID: 2172345094400868496, guid: 8caab6d84e065a64f9bcd21914ba0499, type: 3}
   shotgunBulletPrefab: {fileID: 4588869636891934403, guid: dcb15923bd156054e9e63bc6e8957f0a, type: 3}
-  weaponType:
-    m_InternalValue: 0
+  weaponType: 0
 --- !u!1 &4763849812375411216
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +274,7 @@ Transform:
   m_GameObject: {fileID: 4763849812375411216}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.28}
+  m_LocalPosition: {x: 0, y: 0, z: 0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
