@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1114386151952744103}
   - component: {fileID: 988580011601998808}
   - component: {fileID: -5370637294039639339}
+  - component: {fileID: 8859072942900384556}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -249,6 +250,20 @@ MonoBehaviour:
   laserBulletPrefab: {fileID: 2172345094400868496, guid: 8caab6d84e065a64f9bcd21914ba0499, type: 3}
   shotgunBulletPrefab: {fileID: 4588869636891934403, guid: dcb15923bd156054e9e63bc6e8957f0a, type: 3}
   weaponType: 0
+--- !u!114 &8859072942900384556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3957109528855946375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4eee06d075176e4fa5f2e798dcfe282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  maxHealth: 5
 --- !u!1 &4763849812375411216
 GameObject:
   m_ObjectHideFlags: 0

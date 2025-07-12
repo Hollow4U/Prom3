@@ -72,5 +72,13 @@ public class Enemy : NetworkBehaviour
         {
             TakeDamage(10);
         }
+        else if (other.CompareTag("Player"))
+        {
+            PlayerLife life = other.GetComponent<PlayerLife>();
+            if (life != null)
+            {
+                life.TakeDamageServerRpc(1);
+            }
+        }
     }
 }
