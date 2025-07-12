@@ -12,6 +12,9 @@ public class Enemy : NetworkBehaviour
     [SerializeField]private int currentHealth;
     private Transform target;
 
+    [SerializeField] private GameObject healthPickupPrefab;
+    [SerializeField] private float dropChance = 0.3f; 
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -56,6 +59,7 @@ public class Enemy : NetworkBehaviour
 
         if (currentHealth <= 0)
         {
+            TryDropHealth();
             GetComponent<NetworkObject>().Despawn();
         }
     }
@@ -79,6 +83,17 @@ public class Enemy : NetworkBehaviour
             {
                 life.TakeDamageServerRpc(1);
             }
+        }
+    }
+
+    private void TryDropHealth()
+    {
+        if (healthPickupPrefab == null) return;
+
+        if (UnityEngine.Random.value < dropChance)
+        {
+            GameObject pickup = Instantiate(healthPickupPrefab, transform.position, Quaternion.identity);
+            pickup.GetComponent<NetworkObject>().Spawn();
         }
     }
 }

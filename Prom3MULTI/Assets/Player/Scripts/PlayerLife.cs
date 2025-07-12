@@ -29,4 +29,15 @@ public class PlayerLife : NetworkBehaviour
             GetComponent<NetworkObject>().Despawn();
         }
     }
+
+    public void Heal(int amount)
+    {
+        if (!IsServer) return;
+
+        currentHealth += amount;
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
+
+        Debug.Log($"Player {OwnerClientId} healed. Current HP: {currentHealth}");
+    }
 }
